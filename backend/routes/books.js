@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
       res.send(books);
     });
 });
-
+//kom
 router.post('/', function(req,res,next){
     Book.create({
         title: req.body.title,
