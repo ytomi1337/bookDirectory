@@ -39,7 +39,19 @@ router.delete('/', function(req,res,next){
         { year: req.query.year }
       ]}
      
-     }).then(function() { res.send('ok')})
+     }).then(function(count) { res.send(count)})
+})
+
+router.put('/:id', function(req, res, next){
+    Book.update({
+        author: req.body.author,
+        year: Number(req.body.year),
+        title: req.body.title
+    },{
+        where: {
+            id: req.params.id
+        }
+    }).then(function() { res.send('ok')})
 })
 
 
