@@ -5,7 +5,7 @@ const { Sequelize } = require('sequelize');
 
 router.get('/', function(req, res, next) {
     const page = Number(req.query.page) || 1
-    const limit = Number(req.query.count) || 10
+    const limit = Number(req.query.count) || 20
     const orderKey = req.query.sortKey || 'id'
     const orderValue = req.query.sortValue || 'asc'
 
@@ -32,14 +32,12 @@ router.post('/', function(req,res,next){
 })
 
 
-router.delete('/', function(req,res,next){
+router.delete('/:bookId', function(req,res,next){
     Book.destroy({    where:         {[Sequelize.Op.or]: [
-        { title: req.query.title },
-        { author: req.query.author },
-        { year: req.query.year }
+        { id: req.params.bookId },
       ]}
      
-     }).then(function(count) { res.send(count)})
+     }).then(function(count) { res.send({count: count})})
 })
 
 router.put('/:id', function(req, res, next){
